@@ -1,4 +1,3 @@
 /Users/dimiefthymiou/workspaces/misc/orion-computational-platform/computational/src/test/java/com/orion/computationalplatform/TestBase.java
 /Users/dimiefthymiou/workspaces/misc/orion-computational-platform/computational/src/test/java/com/orion/computationalplatform/simulation/core/GenericSimulationEngineTest.java
-/Users/dimiefthymiou/workspaces/misc/orion-computational-platform/computational/src/test/java/com/orion/computationalplatform/simulation/core/Projectile.java
-/Users/dimiefthymiou/workspaces/misc/orion-computational-platform/computational/src/test/java/com/orion/computationalplatform/simulation/core/ProjectileSimulationEngineTest.java
+/Users/dimiefthymiou/workspaces/misc/orion-computational-platform/computational/src/test/java/com/orion/computationalplatform/simulation/core/PhysicsSimulationEngineTest.java

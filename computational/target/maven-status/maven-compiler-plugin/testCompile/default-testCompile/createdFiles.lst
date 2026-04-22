@@ -1,8 +1,4 @@
-com/orion/computationalplatform/simulation/core/ProjectileSimulationEngineTest.class
+com/orion/computationalplatform/simulation/core/GenericSimulationEngineTest$1.class
 com/orion/computationalplatform/TestBase.class
 com/orion/computationalplatform/simulation/core/GenericSimulationEngineTest.class
-com/orion/computationalplatform/simulation/core/GenericSimulationEngineTest$2.class
-com/orion/computationalplatform/simulation/core/GenericSimulationEngineTest$3.class
-com/orion/computationalplatform/simulation/core/GenericSimulationEngineTest$1.class
-com/orion/computationalplatform/simulation/core/GenericSimulationEngineTest$4.class
-com/orion/computationalplatform/simulation/core/Projectile.class
+com/orion/computationalplatform/simulation/core/PhysicsSimulationEngineTest.class
