@@ -3,7 +3,6 @@ package com.orion.computationalplatform.simulation.core;
 import com.orion.computationalplatform.simulation.event.SimulationEvent;
 import com.orion.computationalplatform.simulation.event.SystemEvent;
 import com.orion.computationalplatform.simulation.event.TargetedEvent;
-import com.orion.computationalplatform.simulation.event.TickEvent;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -21,8 +20,9 @@ public class GenericSimulationEngine implements AutoCloseable
 
     public GenericSimulationEngine()
     {
-        this.eventQueue = new PriorityQueue<>(Comparator.comparingLong(SimulationEvent::timestamp)
-                        .thenComparingInt(SimulationEvent::priority));
+        this.eventQueue = new PriorityQueue<>(
+                        Comparator.comparingLong(SimulationEvent::timestamp)
+                                        .thenComparingInt(SimulationEvent::priority));
         this.entities = new ConcurrentHashMap<>();
     }
 
@@ -39,28 +39,33 @@ public class GenericSimulationEngine implements AutoCloseable
     }
 
 
+    public long getCurrentTime()
+    {
+        return currentTime;
+    }
+
+
     public void run(long duration)
     {
         running = true;
         while(running && !eventQueue.isEmpty())
         {
-            SimulationEvent nextEvent = eventQueue.peek();
-            if(nextEvent.timestamp() > duration)
+            SimulationEvent next = eventQueue.peek();
+            if(next.timestamp() > duration)
             {
                 break;
             }
-            long batchTime = nextEvent.timestamp();
+            long batchTime = next.timestamp();
             currentTime = batchTime;
-            // create a NEW scope for this specific timestamp/batch
-            try(var scope = StructuredTaskScope.open(Joiner.awaitAll(),
-                            config -> config.withThreadFactory(Thread.ofVirtual().factory())))
+            try(var scope = StructuredTaskScope.open(
+                            Joiner.awaitAll(),
+                            cfg -> cfg.withThreadFactory(Thread.ofVirtual().factory())))
             {
-                while(!eventQueue.isEmpty() && eventQueue.peek().timestamp() == batchTime)
+                while(!eventQueue.isEmpty()
+                                && eventQueue.peek().timestamp() == batchTime)
                 {
-                    SimulationEvent event = eventQueue.poll();
-                    processEvent(event, scope, currentTime);
+                    processEvent(eventQueue.poll(), scope, currentTime);
                 }
-                // Join this specific batch's scope
                 scope.join();
             }
             catch(InterruptedException e)
@@ -68,7 +73,6 @@ public class GenericSimulationEngine implements AutoCloseable
                 Thread.currentThread().interrupt();
                 throw new RuntimeException("Simulation interrupted", e);
             }
-            // Check if a SHUTDOWN event was processed in the last batch
             if(!running)
             {
                 break;
@@ -81,26 +85,29 @@ public class GenericSimulationEngine implements AutoCloseable
     {
         switch(event)
         {
-            // The Engine routes ANY targeted event using the interface method
+            // All broadcast subtypes (TickEvent, PhysicsTickEvent, …) handled here.
+            // New broadcast event types cost zero engine changes.
+            case BroadcastEvent b ->
+            {
+                for(SimulationEntity entity : entities.values())
+                {
+                    scope.fork(() -> ScopedValue
+                                    .where(SimulationContext.CURRENT_TIME, timeAtEvent)
+                                    .call(() -> {
+                                        entity.onEvent(b);
+                                        return null;
+                                    }));
+                }
+            }
             case TargetedEvent te ->
             {
                 SimulationEntity entity = entities.get(te.getTargetID());
                 if(entity != null)
                 {
-                    scope.fork(() -> ScopedValue.where(SimulationContext.CURRENT_TIME, timeAtEvent)
+                    scope.fork(() -> ScopedValue
+                                    .where(SimulationContext.CURRENT_TIME, timeAtEvent)
                                     .call(() -> {
                                         entity.onEvent(te);
-                                        return null;
-                                    }));
-                }
-            }
-            case TickEvent t ->
-            {
-                for(SimulationEntity entity : entities.values())
-                {
-                    scope.fork(() -> ScopedValue.where(SimulationContext.CURRENT_TIME, timeAtEvent)
-                                    .call(() -> {
-                                        entity.onEvent(t);
                                         return null;
                                     }));
                 }
@@ -112,8 +119,8 @@ public class GenericSimulationEngine implements AutoCloseable
                     running = false;
                 }
             }
-            // No more IllegalStateException for new domain events!
-            default -> throw new IllegalStateException("Unexpected value: " + event);
+            default ->
+            { /* Extensibility point — unknown event types are silently ignored */ }
         }
     }
 
@@ -121,6 +128,5 @@ public class GenericSimulationEngine implements AutoCloseable
     @Override
     public void close()
     {
-        // No longer need to manually manage an ExecutorService
     }
 }

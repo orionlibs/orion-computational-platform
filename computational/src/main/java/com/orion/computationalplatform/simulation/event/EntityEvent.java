@@ -1,17 +1,18 @@
 package com.orion.computationalplatform.simulation.event;
 
-public record EntityEvent(long timestamp, String entityID, String action) implements TargetedEvent
+public record EntityEvent(long timestamp, String targetID, String type)
+                implements TargetedEvent
 {
     @Override
-    public String getTargetID()
+    public int priority()
     {
-        return entityID; // Mapping the record field to the interface method
+        return 0;
     }
 
 
     @Override
-    public int priority()
+    public String getTargetID()
     {
-        return 1;
+        return targetID;
     }
 }
