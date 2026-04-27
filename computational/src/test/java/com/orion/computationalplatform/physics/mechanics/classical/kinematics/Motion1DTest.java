@@ -20,13 +20,7 @@ public class Motion1DTest extends TestBase
         Position fp = Position.of(Point3D.of(5.0d, 0.0d, 0.0d));
         Direction idof = Direction.of(0.0d);
         PointMass pm = PointMass.of("M1", "M1", ip);
-        Motion motion = Motion.builder()
-                        .objectInMotion(pm)
-                        .finalPosition(fp)
-                        .directionOfMotion(idof)
-                        .initialInstant(Time.of(0.0d))
-                        .finalInstant(Time.of(5.0d))
-                        .build();
+        Motion motion = Motion.of(pm, ip, fp, idof, Time.of(0.0d), Time.of(5.0d));
         assertEquals(0.0d, motion.getDirectionOfMotion().getAngleInRadians());
         assertEquals(0.0d, motion.getObjectInMotion().getMass().getMass());
         assertEquals(5.0d, motion.getMotionDuration());

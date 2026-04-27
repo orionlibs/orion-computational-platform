@@ -19,6 +19,24 @@ public class Motion
     private Time finalInstant;
 
 
+    public static Motion of(PhysicalObject objectInMotion,
+                    Position initialPosition,
+                    Position finalPosition,
+                    Direction directionOfMotion,
+                    Time initialInstant,
+                    Time finalInstant)
+    {
+        return Motion.builder()
+                        .objectInMotion(objectInMotion)
+                        .initialPosition(initialPosition)
+                        .finalPosition(finalPosition)
+                        .directionOfMotion(directionOfMotion)
+                        .initialInstant(initialInstant)
+                        .finalInstant(finalInstant)
+                        .build();
+    }
+
+
     public double getMotionDuration()
     {
         return finalInstant.getInstant() - initialInstant.getInstant();
