@@ -1,20 +1,20 @@
-package com.orion.computationalplatform.math.geometry.point;
+package com.orion.computationalplatform.math.geometry.vector;
 
 import lombok.Builder;
 import lombok.Getter;
 
 @Builder
 @Getter
-public class Point3D
+public class Vector3D
 {
     private double x;
     private double y;
     private double z;
 
 
-    public static Point3D of(double x, double y, double z)
+    public static Vector3D of(double x, double y, double z)
     {
-        return Point3D.builder()
+        return Vector3D.builder()
                         .x(x)
                         .y(y)
                         .z(z)

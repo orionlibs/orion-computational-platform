@@ -14,6 +14,14 @@ public class Mass implements Unit
     private double mass;
 
 
+    public static Mass of(double mass)
+    {
+        return Mass.builder()
+                        .mass(mass)
+                        .build();
+    }
+
+
     @Override
     public String getName()
     {

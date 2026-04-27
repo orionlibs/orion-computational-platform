@@ -3,32 +3,32 @@ package com.orion.computationalplatform.physics.mechanics.classical.kinematics;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.orion.computationalplatform.TestBase;
+import com.orion.computationalplatform.math.geometry.Direction;
 import com.orion.computationalplatform.math.geometry.point.Point3D;
-import com.orion.computationalplatform.math.number.OrderOfMagnitude;
 import com.orion.computationalplatform.physics.PointMass;
-import com.orion.computationalplatform.physics.mechanics.classical.kinematcs.InitialDirectionOfMotion;
-import com.orion.computationalplatform.physics.position.InitialPosition;
+import com.orion.computationalplatform.physics.mechanics.classical.kinematcs.Motion;
+import com.orion.computationalplatform.physics.position.Position;
+import com.orion.computationalplatform.physics.unit.Time;
 import org.junit.jupiter.api.Test;
 
 public class Motion1DTest extends TestBase
 {
     @Test
-    public void orderOfMagnitude()
+    public void motionOfPointMassIn1D()
     {
-        InitialPosition ip = InitialPosition.builder()
-                        .position(Point3D.builder()
-                                        .x(0.0d)
-                                        .y(0.0d)
-                                        .z(0.0d)
-                                        .build())
+        Position ip = Position.of(Point3D.of(0.0d, 0.0d, 0.0d));
+        Position fp = Position.of(Point3D.of(5.0d, 0.0d, 0.0d));
+        Direction idof = Direction.of(0.0d);
+        PointMass pm = PointMass.of("M1", "M1", ip);
+        Motion motion = Motion.builder()
+                        .objectInMotion(pm)
+                        .finalPosition(fp)
+                        .directionOfMotion(idof)
+                        .initialInstant(Time.of(0.0d))
+                        .finalInstant(Time.of(5.0d))
                         .build();
-        InitialDirectionOfMotion idof = InitialDirectionOfMotion.builder()
-                        .angleInRadians(0.0d)
-                        .build();
-        PointMass pm = PointMass.builder()
-                        .initialPosition(ip)
-                        .initialDirectionOfMotion(idof)
-                        .build();
-        assertEquals(0.0d, pm.getInitialDirectionOfMotion().getAngleInRadians());
+        assertEquals(0.0d, motion.getDirectionOfMotion().getAngleInRadians());
+        assertEquals(0.0d, motion.getObjectInMotion().getMass().getMass());
+        assertEquals(5.0d, motion.getMotionDuration());
     }
 }

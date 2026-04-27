@@ -14,6 +14,14 @@ public class Length implements Unit
     private double length;
 
 
+    public static Length of(double length)
+    {
+        return Length.builder()
+                        .length(length)
+                        .build();
+    }
+
+
     @Override
     public String getName()
     {
