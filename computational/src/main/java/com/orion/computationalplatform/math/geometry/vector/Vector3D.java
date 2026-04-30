@@ -1,5 +1,6 @@
 package com.orion.computationalplatform.math.geometry.vector;
 
+import com.orion.computationalplatform.math.geometry.Angle;
 import com.orion.computationalplatform.math.geometry.point.Point3D;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -32,5 +33,18 @@ public class Vector3D
                         .y(endPoint.getY() - startPoint.getY())
                         .z(endPoint.getZ() - startPoint.getZ())
                         .build();
+    }
+
+
+    public double getMagnitude()
+    {
+        return Math.sqrt((x * x) + (y * y) + (z * z));
+    }
+
+
+    public Angle getAngleWithXAxis()
+    {
+        double dotProduct = DotProduct.calculate(this, Vector3D.of(1, 0, 0));
+        return Angle.of(Math.acos(dotProduct / getMagnitude()));
     }
 }

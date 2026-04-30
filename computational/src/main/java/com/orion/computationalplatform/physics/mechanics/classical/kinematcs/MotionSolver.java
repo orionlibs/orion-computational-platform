@@ -33,6 +33,12 @@ public class MotionSolver
 
     public Vector3D getDisplacement()
     {
-        return Vector3D.of(motion.getInitialPosition().getPosition(), motion.getFinalPosition().getPosition());
+        if(motion.getMotionParameters().isFinalPositionExists())
+        {
+            return Vector3D.of(motion.getInitialPosition().getPosition(), motion.getFinalPosition().getPosition());
+        }
+        else
+        {
+        }
     }
 }
