@@ -41,10 +41,4 @@ public class Motion
     {
         return finalInstant.getInstant() - initialInstant.getInstant();
     }
-
-
-    public double getDistanceTravelled()
-    {
-        return 0.0d;
-    }
 }
