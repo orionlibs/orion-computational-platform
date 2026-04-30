@@ -24,6 +24,7 @@ public class MotionSolverTest extends TestBase
         PointMass pm = PointMass.of("M1", "M1", ip);
         Motion motion = Motion.of(pm, ip, fp, idof, Time.of(0.0d), Time.of(5.0d));
         MotionSolver ms = MotionSolver.of(motion);
+        assertEquals(5.0d, ms.getMotionDuration());
         assertEquals(Vector3D.of(5.0d, 2.0d, 3.0d), ms.getDisplacement());
     }
 }

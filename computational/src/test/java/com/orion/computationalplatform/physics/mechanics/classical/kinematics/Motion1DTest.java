@@ -23,6 +23,5 @@ public class Motion1DTest extends TestBase
         Motion motion = Motion.of(pm, ip, fp, idof, Time.of(0.0d), Time.of(5.0d));
         assertEquals(0.0d, motion.getDirectionOfMotion().getAngleInRadians());
         assertEquals(0.0d, motion.getObjectInMotion().getMass().getMass());
-        assertEquals(5.0d, motion.getMotionDuration());
     }
 }

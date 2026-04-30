@@ -17,6 +17,7 @@ public class Motion
     private Direction directionOfMotion;
     private Time initialInstant;
     private Time finalInstant;
+    private MotionParameters motionParameters;
 
 
     public static Motion of(PhysicalObject objectInMotion,
@@ -26,6 +27,13 @@ public class Motion
                     Time initialInstant,
                     Time finalInstant)
     {
+        MotionParameters motionParametersNew = MotionParameters.builder()
+                        .initialPositionExists(initialPosition != null)
+                        .finalPositionExists(finalPosition != null)
+                        .directionOfMotionExists(directionOfMotion != null)
+                        .initialInstantExists(initialInstant != null)
+                        .finalInstantExists(finalInstant != null)
+                        .build();
         return Motion.builder()
                         .objectInMotion(objectInMotion)
                         .initialPosition(initialPosition)
@@ -33,12 +41,7 @@ public class Motion
                         .directionOfMotion(directionOfMotion)
                         .initialInstant(initialInstant)
                         .finalInstant(finalInstant)
+                        .motionParameters(motionParametersNew)
                         .build();
-    }
-
-
-    public double getMotionDuration()
-    {
-        return finalInstant.getInstant() - initialInstant.getInstant();
     }
 }

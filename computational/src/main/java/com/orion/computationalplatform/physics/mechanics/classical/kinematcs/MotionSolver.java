@@ -25,6 +25,12 @@ public class MotionSolver
     }
 
 
+    public double getMotionDuration()
+    {
+        return motion.getFinalInstant().getInstant() - motion.getInitialInstant().getInstant();
+    }
+
+
     public Vector3D getDisplacement()
     {
         return Vector3D.of(motion.getInitialPosition().getPosition(), motion.getFinalPosition().getPosition());
