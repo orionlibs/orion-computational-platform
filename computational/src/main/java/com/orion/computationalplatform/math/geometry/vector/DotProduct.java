@@ -1,6 +1,8 @@
 package com.orion.computationalplatform.math.geometry.vector;
 
-public class DotProduct
+import com.orion.computationalplatform.physics.unit.Scalar;
+
+public class DotProduct implements Scalar
 {
     public static double calculate(Vector3D u, Vector3D v)
     {

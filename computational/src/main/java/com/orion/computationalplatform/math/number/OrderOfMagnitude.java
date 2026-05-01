@@ -1,6 +1,8 @@
 package com.orion.computationalplatform.math.number;
 
-public class OrderOfMagnitude
+import com.orion.computationalplatform.physics.unit.Scalar;
+
+public class OrderOfMagnitude implements Scalar
 {
     public static int get(Number x)
     {

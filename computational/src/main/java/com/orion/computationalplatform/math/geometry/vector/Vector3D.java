@@ -3,12 +3,13 @@ package com.orion.computationalplatform.math.geometry.vector;
 import com.orion.computationalplatform.math.geometry.Angle;
 import com.orion.computationalplatform.math.geometry.Axis;
 import com.orion.computationalplatform.math.geometry.point.Point3D;
+import com.orion.computationalplatform.physics.unit.AVector;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 
 @SuperBuilder
 @Getter
-public class Vector3D
+public class Vector3D implements AVector
 {
     public static final Vector3D ZERO = Vector3D.of(0, 0, 0);
     public static final Vector3D UNIT_ON_X_AXIS = Vector3D.of(1, 0, 0);

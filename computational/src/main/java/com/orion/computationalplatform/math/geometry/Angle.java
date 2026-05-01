@@ -1,11 +1,12 @@
 package com.orion.computationalplatform.math.geometry;
 
+import com.orion.computationalplatform.physics.unit.Scalar;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 
 @SuperBuilder
 @Getter
-public class Angle
+public class Angle implements Scalar
 {
     public static final Angle ZERO = Angle.of(0);
     public static final Angle RIGHT_ANGLE = Angle.of(Math.PI / 2.0d);
