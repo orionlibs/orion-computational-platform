@@ -9,6 +9,8 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode
 public class Angle
 {
+    public static final Angle ZERO = Angle.of(0);
+    public static final Angle RIGHT_ANGLE = Angle.of(Math.PI / 2.0d);
     protected double angleInRadians;
 
 

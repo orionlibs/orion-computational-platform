@@ -16,7 +16,7 @@ public class Motion1DTest extends TestBase
     @Test
     public void motionOfPointMassIn1D()
     {
-        Position ip = Position.of(Point3D.of(0.0d, 0.0d, 0.0d));
+        Position ip = Position.of(Point3D.ORIGIN);
         Position fp = Position.of(Point3D.of(5.0d, 0.0d, 0.0d));
         Direction idof = Direction.of(0.0d);
         PointMass pm = PointMass.of("M1", "M1", ip);

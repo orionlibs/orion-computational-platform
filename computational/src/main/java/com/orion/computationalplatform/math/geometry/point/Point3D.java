@@ -7,6 +7,7 @@ import lombok.Getter;
 @Getter
 public class Point3D
 {
+    public static final Point3D ORIGIN = Point3D.of(0, 0, 0);
     private double x;
     private double y;
     private double z;

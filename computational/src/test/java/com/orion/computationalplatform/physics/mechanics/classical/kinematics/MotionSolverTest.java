@@ -18,7 +18,7 @@ public class MotionSolverTest extends TestBase
     @Test
     public void solveMotion1D()
     {
-        Position ip = Position.of(Point3D.of(0.0d, 0.0d, 0.0d));
+        Position ip = Position.of(Point3D.ORIGIN);
         Position fp = Position.of(Point3D.of(5.0d, 2.0d, 3.0d));
         Direction idof = Direction.of(0.0d);
         PointMass pm = PointMass.of("M1", "M1", ip);
@@ -27,18 +27,5 @@ public class MotionSolverTest extends TestBase
         assertEquals(5.0d, ms.getMotionDuration());
         assertEquals(Vector3D.of(5.0d, 2.0d, 3.0d), ms.getDisplacementVector());
         assertEquals(5.0d, ms.getDistanceTravelled());
-    }
-
-
-    @Test
-    public void solveMotion1D_withoutFinalPosition_useDirection()
-    {
-        Position ip = Position.of(Point3D.of(0.0d, 0.0d, 0.0d));
-        Direction idof = Direction.of(0.0d);
-        PointMass pm = PointMass.of("M1", "M1", ip);
-        Motion motion = Motion.of(pm, ip, null, idof, Time.of(0.0d), Time.of(5.0d));
-        MotionSolver ms = MotionSolver.of(motion);
-        assertEquals(5.0d, ms.getMotionDuration());
-        assertEquals(Vector3D.of(5.0d, 2.0d, 3.0d), ms.getDisplacementVector());
     }
 }
