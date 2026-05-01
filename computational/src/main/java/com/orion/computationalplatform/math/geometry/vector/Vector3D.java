@@ -66,6 +66,30 @@ public class Vector3D implements AVector
     }
 
 
+    public Vector3D add(Vector3D v)
+    {
+        return Vector3D.of(x + v.getX(), y + v.getY(), z + v.getZ());
+    }
+
+
+    public Vector3D subtract(Vector3D v)
+    {
+        return Vector3D.of(x - v.getX(), y - v.getY(), z - v.getZ());
+    }
+
+
+    public Vector3D multiplyByScalar(Number a)
+    {
+        return Vector3D.of(x * a.doubleValue(), y * a.doubleValue(), z * a.doubleValue());
+    }
+
+
+    public Vector3D divideByScalar(Number a)
+    {
+        return Vector3D.of(x / a.doubleValue(), y / a.doubleValue(), z / a.doubleValue());
+    }
+
+
     @Override
     public boolean equals(Object o)
     {
