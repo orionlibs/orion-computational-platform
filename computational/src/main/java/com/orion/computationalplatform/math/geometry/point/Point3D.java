@@ -21,4 +21,34 @@ public class Point3D
                         .z(z)
                         .build();
     }
+
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if(this == o)
+        {
+            return true;
+        }
+        if(!(o instanceof Point3D))
+        {
+            return false;
+        }
+        Point3D other = (Point3D)o;
+        return Double.compare(this.x, other.x) == 0
+                        && Double.compare(this.y, other.y) == 0
+                        && Double.compare(this.z, other.z) == 0;
+    }
+
+
+    @Override
+    public int hashCode()
+    {
+        final int prime = 59;
+        int result = 1;
+        result = prime * result + Long.hashCode(Double.doubleToLongBits(this.x));
+        result = prime * result + Long.hashCode(Double.doubleToLongBits(this.y));
+        result = prime * result + Long.hashCode(Double.doubleToLongBits(this.z));
+        return result;
+    }
 }

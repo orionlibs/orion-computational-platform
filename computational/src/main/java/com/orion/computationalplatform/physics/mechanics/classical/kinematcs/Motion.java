@@ -105,7 +105,6 @@ public class Motion
             }
             else if(motionParameters.isDirectionOfMotionExists())
             {
-
             }
         }
     }

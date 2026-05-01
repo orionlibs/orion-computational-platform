@@ -27,4 +27,34 @@ public class PhysicalObject implements Movable
                         .position(position)
                         .build();
     }
+
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if(this == o)
+        {
+            return true;
+        }
+        if(!(o instanceof PhysicalObject))
+        {
+            return false;
+        }
+        PhysicalObject other = (PhysicalObject)o;
+        return this.id.toString().equals(other.id.toString())
+                        && this.position.equals(other.position)
+                        && this.mass.equals(other.mass);
+    }
+
+
+    @Override
+    public int hashCode()
+    {
+        final int prime = 59;
+        int result = 1;
+        result = prime * result + this.id.toString().hashCode();
+        result = prime * result + this.position.hashCode();
+        result = prime * result + this.mass.hashCode();
+        return result;
+    }
 }

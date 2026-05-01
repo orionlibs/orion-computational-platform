@@ -1,10 +1,8 @@
 package com.orion.computationalplatform.math.geometry;
 
-import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
 
 @SuperBuilder
-@EqualsAndHashCode
 public class Direction extends Angle
 {
     public static Direction of(double angleInRadians)
@@ -20,5 +18,19 @@ public class Direction extends Angle
         return Direction.builder()
                         .angleInRadians(angle.getAngleInRadians())
                         .build();
+    }
+
+
+    @Override
+    public boolean equals(Object o)
+    {
+        return super.equals(o);
+    }
+
+
+    @Override
+    public int hashCode()
+    {
+        return super.hashCode();
     }
 }

@@ -34,4 +34,30 @@ public class Time implements Unit
     {
         return "s";
     }
+
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if(this == o)
+        {
+            return true;
+        }
+        if(!(o instanceof Time))
+        {
+            return false;
+        }
+        Time other = (Time)o;
+        return Double.compare(this.instant, other.instant) == 0;
+    }
+
+
+    @Override
+    public int hashCode()
+    {
+        final int prime = 59;
+        int result = 1;
+        result = prime * result + Long.hashCode(Double.doubleToLongBits(this.instant));
+        return result;
+    }
 }
