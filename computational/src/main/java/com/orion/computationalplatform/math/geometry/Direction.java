@@ -13,4 +13,12 @@ public class Direction extends Angle
                         .angleInRadians(angleInRadians)
                         .build();
     }
+
+
+    public static Direction of(Angle angle)
+    {
+        return Direction.builder()
+                        .angleInRadians(angle.getAngleInRadians())
+                        .build();
+    }
 }

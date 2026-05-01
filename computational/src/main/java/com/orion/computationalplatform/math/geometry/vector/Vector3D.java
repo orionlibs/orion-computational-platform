@@ -1,19 +1,20 @@
 package com.orion.computationalplatform.math.geometry.vector;
 
 import com.orion.computationalplatform.math.geometry.Angle;
+import com.orion.computationalplatform.math.geometry.Axis;
 import com.orion.computationalplatform.math.geometry.point.Point3D;
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.experimental.SuperBuilder;
 
-@Builder
+@SuperBuilder
 @Getter
 @EqualsAndHashCode
 public class Vector3D
 {
-    private double x;
-    private double y;
-    private double z;
+    protected double x;
+    protected double y;
+    protected double z;
 
 
     public static Vector3D of(double x, double y, double z)
@@ -42,9 +43,22 @@ public class Vector3D
     }
 
 
-    public Angle getAngleWithXAxis()
+    public Angle getAngleWithAxis(Axis axis)
     {
-        double dotProduct = DotProduct.calculate(this, Vector3D.of(1, 0, 0));
+        Vector3D axisVector = null;
+        if(axis == Axis.X_AXIS)
+        {
+            axisVector = Vector3D.of(1, 0, 0);
+        }
+        else if(axis == Axis.Y_AXIS)
+        {
+            axisVector = Vector3D.of(0, 1, 0);
+        }
+        else if(axis == Axis.Z_AXIS)
+        {
+            axisVector = Vector3D.of(0, 0, 1);
+        }
+        double dotProduct = DotProduct.calculate(this, axisVector);
         return Angle.of(Math.acos(dotProduct / getMagnitude()));
     }
 }

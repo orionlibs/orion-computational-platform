@@ -34,7 +34,7 @@ public class PointMass extends PhysicalObject
     {
         if(mass == null)
         {
-            this.mass = Mass.of(0.0d);
+            this.mass = Mass.of(0);
         }
         return mass;
     }

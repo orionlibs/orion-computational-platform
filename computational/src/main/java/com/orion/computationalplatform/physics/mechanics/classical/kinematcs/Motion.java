@@ -1,5 +1,6 @@
 package com.orion.computationalplatform.physics.mechanics.classical.kinematcs;
 
+import com.orion.computationalplatform.math.geometry.Axis;
 import com.orion.computationalplatform.math.geometry.Direction;
 import com.orion.computationalplatform.physics.PhysicalObject;
 import com.orion.computationalplatform.physics.position.Position;
@@ -99,8 +100,12 @@ public class Motion
         {
             if(motionParameters.isFinalPositionExists())
             {
-                //Vector3D displacementVector
-                setDirectionOfMotion(Direction.of());
+                DisplacementVector displacementVector = DisplacementVector.of(initialPosition.getPosition(), finalPosition.getPosition());
+                directionOfMotion = Direction.of(displacementVector.getAngleWithAxis(Axis.X_AXIS));
+            }
+            else if(motionParameters.isDirectionOfMotionExists())
+            {
+
             }
         }
     }
