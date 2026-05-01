@@ -1,28 +1,18 @@
 package com.orion.computationalplatform.physics.mechanics.classical.kinematcs;
 
-import com.orion.computationalplatform.math.geometry.Angle;
-import com.orion.computationalplatform.math.geometry.Axis;
-import com.orion.computationalplatform.physics.unit.AVector;
+import com.orion.computationalplatform.physics.unit.Scalar;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @AllArgsConstructor
 @Data
-public class AverageVelocity implements AVector
+public class AverageVelocity implements Scalar
 {
-    private DisplacementVector displacement;
-    private double travelDuration;
+    private double averageVelocity;
 
 
-    public static AverageVelocity of(DisplacementVector displacement, double travelDuration)
+    public static AverageVelocity of(double averageVelocity)
     {
-        return new AverageVelocity(displacement, travelDuration);
-    }
-
-
-    public double calculate()
-    {
-        Angle direction = displacement.getAngleWithAxis(Axis.X_AXIS);
-        return (displacement.getMagnitude() * Math.cos(direction.getAngleInRadians())) / travelDuration;
+        return new AverageVelocity(averageVelocity);
     }
 }
