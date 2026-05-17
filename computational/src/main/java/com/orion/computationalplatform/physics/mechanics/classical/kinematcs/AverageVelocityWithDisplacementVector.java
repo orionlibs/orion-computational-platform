@@ -2,8 +2,6 @@ package com.orion.computationalplatform.physics.mechanics.classical.kinematcs;
 
 import com.orion.computationalplatform.math.geometry.Angle;
 import com.orion.computationalplatform.math.geometry.Axis;
-import com.orion.computationalplatform.physics.unit.Scalar;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data

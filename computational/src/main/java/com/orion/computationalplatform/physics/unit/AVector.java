@@ -2,5 +2,4 @@ package com.orion.computationalplatform.physics.unit;
 
 public interface AVector
 {
-
 }
